@@ -27,8 +27,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Set up default mongoose connection
-mongoose.connect(`${MONGODB_URI}`, {
-    useMongoClient: true
+const uri = process.env.MONGODBURI;
+mongoose.connect(uri, {useMongoClient: true}, function(error) {
+    // Check error in initial connection. There is no 2nd param to the callback.
+    console.log(error);
 });
 
 //Get the default connection

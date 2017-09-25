@@ -7,6 +7,9 @@ const app = express();
 // =============================================================
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//access environmental variables for username, password, host
+require('dotenv').config({path: 'info.env'});
+
 // Serve static content for the app from the "public" directory in the application directory.
 // =============================================================
 app.use(express.static("public"));
