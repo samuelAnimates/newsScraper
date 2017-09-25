@@ -49,7 +49,7 @@ $(".JS-comment-btn").click(function() {
         $(`button.JS-comment-btn.${articleId}`).hide();
         // log data to the console so we can see
         for (let obj of data.comments) {
-            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div><button class='btn btn-danger JS-btn-delete' data-article-id=${articleId} data-id=${obj._id}>Delete</button><button class='btn btn-info' data-article-id=${articleId} data-id=${obj._id}>Edit</button></div>`;
+            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div><button class='btn btn-danger JS-btn-delete' data-article-id=${articleId} data-id=${obj._id}>Delete</button></div>`;
             console.log(newDiv);
             $(`.comments-container.${articleId}`).append(newDiv);
         }
