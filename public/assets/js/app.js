@@ -62,7 +62,7 @@ $(".comments-container").on('click', '.JS-btn-delete', function() {
     let commentId = $(this).attr("data-id");
     let articleId = $(this).attr("data-article-id");
 
-    console.log(`${commentId}`);
+    $(this).parent().hide();
 
     // process the form
     $.ajax({
@@ -72,7 +72,6 @@ $(".comments-container").on('click', '.JS-btn-delete', function() {
     })
     // using the done promise callback
     .done(function(data) {
-        $(this).parent().hide();
-
+        
     });
 });
