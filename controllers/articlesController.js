@@ -27,9 +27,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Set up default mongoose connection
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+mongoose.connect(MONGODB_URI);
 
 //Get the default connection
 const db = mongoose.connection;
