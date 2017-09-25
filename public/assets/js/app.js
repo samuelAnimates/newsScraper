@@ -49,10 +49,30 @@ $(".JS-comment-btn").click(function() {
         $(`button.JS-comment-btn.${articleId}`).hide();
         // log data to the console so we can see
         for (let obj of data.comments) {
-            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div><button class='btn btn-danger' data-id=${obj._id}>Delete</button><button class='btn btn-info' data-id=${obj._id}>Edit</button></div>`;
+            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div><button class='btn btn-danger JS-btn-delete' data-article-id=${articleId} data-id=${obj._id}>Delete</button><button class='btn btn-info' data-article-id=${articleId} data-id=${obj._id}>Edit</button></div>`;
             console.log(newDiv);
             $(`.comments-container.${articleId}`).append(newDiv);
         }
         
     });
   });
+
+$(".comments-container").on('click', '.JS-btn-delete', function() {
+    // get the form data
+    let commentId = $(this).attr("data-id");
+    let articleId = $(this).attr("data-article-id");
+
+    console.log(`${commentId}`);
+
+    // process the form
+    $.ajax({
+        type: "POST",
+        url: `/commentsbyarticle/${articleId}`,
+        data: {deleteCommentId: commentId},
+    })
+    // using the done promise callback
+    .done(function(data) {
+        $(this).parent().hide();
+
+    });
+});

@@ -130,41 +130,64 @@ router.get("/articles/:id", function(req, res) {
     });
   });
 
-router.post("/articles/:id", function(req, res) {
+router.post("/commentsbyarticle/:id", function(req, res) {
 
         console.log("We're in the post route");
 
         // Use our Note model to make a new note from the req.body
-        let newComment = new Comment(req.body);
-        console.log(newComment);
+        let commentId = req.body.deleteCommentId;
 
-        // Save the new note to mongoose
-        newComment.save(function(error, doc) {
-            console.log(`we're trying to save...`);
+        // Use the article id to find and update it's note
+        Article.findOneAndUpdate({ "_id": req.params.id }, {$pull: { "comments": commentId }})
+        // Execute the above query
+        .exec(function(err, doc) {
+            console.log(`"We're executing...`);
             // Log any errors
-            if (error) {
-                console.log(`Error in saving the newComment: ${error}`);
+            if (err) {
+                console.log(`Error in updating the database: ${err}`);
             }
-            // Otherwise
             else {
-                // Use the article id to find and update it's note
-                Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "comments": doc }})
-                // Execute the above query
-                .exec(function(err, doc) {
-                    console.log(`"We're executing...`);
-                    // Log any errors
-                    if (err) {
-                        console.log(`Error in updating the database: ${err}`);
-                    }
-                    else {
-                        // Or send the document to the browser
-                        console.log(`New comment: ${doc}`);
-                    }
-                });
+                // Or send the document to the browser
+                console.log(`Suces`);
             }
         });
-
 });
+
+router.post("/articles/:id", function(req, res) {
+    
+            console.log("We're in the post route");
+    
+            // Use our Note model to make a new note from the req.body
+            let newComment = new Comment(req.body);
+            console.log(newComment);
+    
+            // Save the new note to mongoose
+            newComment.save(function(error, doc) {
+                console.log(`we're trying to save...`);
+                // Log any errors
+                if (error) {
+                    console.log(`Error in saving the newComment: ${error}`);
+                }
+                // Otherwise
+                else {
+                    // Use the article id to find and update it's note
+                    Article.findOneAndUpdate({ "_id": req.params.id }, {$push: { "comments": doc }})
+                    // Execute the above query
+                    .exec(function(err, doc) {
+                        console.log(`"We're executing...`);
+                        // Log any errors
+                        if (err) {
+                            console.log(`Error in updating the database: ${err}`);
+                        }
+                        else {
+                            // Or send the document to the browser
+                            console.log(`New comment: ${doc}`);
+                        }
+                    });
+                }
+            });
+    
+    });
 
 // Export routes for use by our server (server.js)
 module.exports = router;
