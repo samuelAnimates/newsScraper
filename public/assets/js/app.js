@@ -1,3 +1,5 @@
+ 
+
  // submit
  $('.JS-comment-form').submit(function(event) {
 
@@ -42,15 +44,15 @@ $(".JS-comment-btn").click(function() {
         type: "GET",
         url: `/articles/${articleId}`
     })
-        // using the done promise callback
-        .done(function(data) {
-            console.log(`here's the data: ${data}`);
-            // log data to the console so we can see
-            for (let obj of data.comments) {
-                let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div></div>`;
-                console.log(newDiv);
-                $(`.comments-container.${articleId}`).append(newDiv);
-            }
-            
-        });
+    // using the done promise callback
+    .done(function(data) {
+        $(".JS-comment-btn").hide();
+        // log data to the console so we can see
+        for (let obj of data.comments) {
+            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div></div>`;
+            console.log(newDiv);
+            $(`.comments-container.${articleId}`).append(newDiv);
+        }
+        
+    });
   });

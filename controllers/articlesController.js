@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Set up default mongoose connection
-const mongoDB = 'mongodb://localhost/scraper';
+const mongoDB = 'mongodb://heroku_2v52ldwd:54n5cvlkiebtfe2h4ors1a04m4@ds147864.mlab.com:47864/heroku_2v52ldwd';
 mongoose.connect(mongoDB, {
   useMongoClient: true
 });
