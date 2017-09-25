@@ -46,10 +46,10 @@ $(".JS-comment-btn").click(function() {
     })
     // using the done promise callback
     .done(function(data) {
-        $(".JS-comment-btn").hide();
+        $(`button.JS-comment-btn.${articleId}`).hide();
         // log data to the console so we can see
         for (let obj of data.comments) {
-            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div></div>`;
+            let newDiv = `<div class='panel panel-info'><h4 class='panel-title'>${obj.title}</h4><span>By: ${obj.author}</span><div class='panel-body'>${obj.body}</div><button class='btn btn-danger' data-id=${obj._id}>Delete</button><button class='btn btn-info' data-id=${obj._id}>Edit</button></div>`;
             console.log(newDiv);
             $(`.comments-container.${articleId}`).append(newDiv);
         }

@@ -24,8 +24,20 @@ var ArticleSchema = new Schema({
     type: Schema.Types.ObjectId,
     // The ObjectIds will refer to the ids in the Comment model
     ref: "Comment"
-  }]
+  }],
 });
+
+ArticleSchema.pre('save', function (next) {
+  var self = this;
+  Article.find({title : self.title}, function (err, docs) {
+      if (!docs.length){
+          next();
+      }else{                
+          console.log('article exists: ',self.title);
+          next(new Error("article exists!"));
+      }
+  });
+}) ;
 
 // Create the Article model with the ArticleSchema
 const Article = mongoose.model("Article", ArticleSchema);

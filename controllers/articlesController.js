@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //Set up default mongoose connection
-mongoose.connect(MONGODB_URI, {
+mongoose.connect("mongodb://localhost/scraper", {
   useMongoClient: true
 });
 
