@@ -1,6 +1,6 @@
+const PORT = process.env.PORT || 3000;
 const express = require("express");
 const bodyParser = require("body-parser");
-const port = process.env.PORT || 3000;
 const app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
@@ -29,4 +29,4 @@ app.set("view engine", "handlebars");
 var routes = require("./controllers/articlesController.js");
 app.use("/", routes);
 
-app.listen(port);
+app.listen(PORT);

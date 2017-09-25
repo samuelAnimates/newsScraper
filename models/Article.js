@@ -17,13 +17,14 @@ var ArticleSchema = new Schema({
   },
   summary: {
     type: String,
-    default: "N/A"
   },
-  // This only saves one note's ObjectId, ref refers to the Note model
-  comment: {
+  // array of comment ids
+  comments: [{
+    // array of comment ObjectIds
     type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Comment model
     ref: "Comment"
-  }
+  }]
 });
 
 // Create the Article model with the ArticleSchema
